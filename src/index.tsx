@@ -14,8 +14,12 @@ axios.interceptors.response.use(
   },
   function(error) {
     console.log('error, ' , error);
-    if (error.response.status === 400) {
+    if (error?.response.status === 400) {
       alert(error.response.data?.data);
+    } else if(error?.response?.status === 401) {
+      alert('401 no authorization header');
+    } else if (error?.response?.status === 403) {
+      alert('403 access denied for this user');
     }
     return Promise.reject(error.response);
   }
